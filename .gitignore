@@ -1,0 +1,8 @@
+*.suo
+TagAltering/bin
+TagAltering/obj
+TagClient/bin
+TagClient/obj
+TagTester/bin
+TagTester/obj
+TagAltering/TestFiles
