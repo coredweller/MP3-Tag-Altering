@@ -15,41 +15,11 @@ namespace TagAltering
             _FilePaths = filePaths;
         }
 
-        /// <summary>
-        /// Updates the order of the tracks to be in the correct linear order
-        /// </summary>
-        /// <param name="orderProtocol">The way to order the file paths before applying track ordering</param>
-        /// <returns>Whether or not the operation succeeded</returns>
-        public bool UpdateTrackOrder( OrderProtocol orderProtocol ) {
-
-            //If there are no files then get out of here
-            if ( _FilePaths == null || _FilePaths.Count <= 0 ) return false;
-
-            //Based on the Order Protocol use a different ordering scheme TODO: Replace with strategy pattern
-            switch ( orderProtocol ) {
-                case OrderProtocol.Name:
-                    return ProcessByFileName();
-                case OrderProtocol.Database:
-                    return ProcessByDatabase();
-                default: return false;
-            }
-        }
-
-        /// <summary>
-        /// OrderProtocol Database Ordering Scheme
-        /// </summary>
-        /// <returns></returns>
-        private bool ProcessByDatabase() {
-            //LEFT OFF HERE
-
-
-            return false;
-        }
-
+        
         /// <summary>
         /// OrderProtocol Name Ordering Scheme
         /// </summary>
-        private bool ProcessByFileName() {
+        public bool ProcessByFileName() {
             var tuples = new List<Tuple<string, string>>();
 
             foreach ( var path in _FilePaths ) {

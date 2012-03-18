@@ -31,8 +31,15 @@
             this.rdoName = new System.Windows.Forms.RadioButton();
             this.rdoDatabase = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lstFiles = new System.Windows.Forms.ListBox();
+            this.lstDatabase = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtShowDate = new System.Windows.Forms.TextBox();
+            this.btnGetShow = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtProcess
@@ -92,37 +99,98 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Sort By:";
             // 
-            // listBox1
+            // lstFiles
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(94, 146);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(124, 160);
-            this.listBox1.TabIndex = 6;
+            this.lstFiles.FormattingEnabled = true;
+            this.lstFiles.Location = new System.Drawing.Point(154, 185);
+            this.lstFiles.Name = "lstFiles";
+            this.lstFiles.Size = new System.Drawing.Size(124, 251);
+            this.lstFiles.TabIndex = 6;
             // 
-            // listBox2
+            // lstDatabase
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(335, 146);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(117, 160);
-            this.listBox2.TabIndex = 7;
+            this.lstDatabase.FormattingEnabled = true;
+            this.lstDatabase.Location = new System.Drawing.Point(343, 185);
+            this.lstDatabase.Name = "lstDatabase";
+            this.lstDatabase.Size = new System.Drawing.Size(117, 251);
+            this.lstDatabase.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(151, 169);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Your Files:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(340, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Database Order:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(327, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Show Date:";
+            // 
+            // txtShowDate
+            // 
+            this.txtShowDate.Location = new System.Drawing.Point(396, 21);
+            this.txtShowDate.Name = "txtShowDate";
+            this.txtShowDate.Size = new System.Drawing.Size(100, 20);
+            this.txtShowDate.TabIndex = 11;
+            // 
+            // btnGetShow
+            // 
+            this.btnGetShow.Location = new System.Drawing.Point(502, 19);
+            this.btnGetShow.Name = "btnGetShow";
+            this.btnGetShow.Size = new System.Drawing.Size(75, 23);
+            this.btnGetShow.TabIndex = 12;
+            this.btnGetShow.Text = "Get Show";
+            this.btnGetShow.UseVisualStyleBackColor = true;
+            this.btnGetShow.Click += new System.EventHandler(this.btnGetShow_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnGetShow);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtShowDate);
+            this.groupBox1.Location = new System.Drawing.Point(15, 118);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(606, 341);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 343);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(670, 481);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lstDatabase);
+            this.Controls.Add(this.lstFiles);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rdoDatabase);
             this.Controls.Add(this.rdoName);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtProcess);
+            this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,8 +204,14 @@
         private System.Windows.Forms.RadioButton rdoName;
         private System.Windows.Forms.RadioButton rdoDatabase;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lstFiles;
+        private System.Windows.Forms.ListBox lstDatabase;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtShowDate;
+        private System.Windows.Forms.Button btnGetShow;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

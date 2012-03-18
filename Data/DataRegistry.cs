@@ -9,6 +9,34 @@ namespace Data
 
         public DataRegistry() {
 
+
+            For<IShowRepository>()
+                .HybridHttpOrThreadLocalScoped()
+                .Use<ShowRepository>()
+                .Ctor<IDatabaseFactory>("factory").IsTheDefault();
+
+            SelectConstructor<ShowRepository>(() => new ShowRepository((IDatabaseFactory)null));
+
+            For<ISetRepository>()
+                .HybridHttpOrThreadLocalScoped()
+                .Use<SetRepository>()
+                .Ctor<IDatabaseFactory>("factory").IsTheDefault();
+
+            SelectConstructor<SetRepository>(() => new SetRepository((IDatabaseFactory)null));
+
+            For<ISetSongRepository>()
+                .HybridHttpOrThreadLocalScoped()
+                .Use<SetSongRepository>()
+                .Ctor<IDatabaseFactory>("factory").IsTheDefault();
+
+            SelectConstructor<SetSongRepository>(() => new SetSongRepository((IDatabaseFactory)null));
+
+
+
+
+
+
+
             For<Core.Infrastructure.IUnitOfWork>()
                         .HybridHttpOrThreadLocalScoped()
                         .Use<Repository.UnitOfWork>();
