@@ -1,6 +1,6 @@
 ﻿using log4net;
 using Core.Helpers;
-using Core.Repository;
+using Repository;
 using Core.Infrastructure.Logging;
 
 namespace Repository

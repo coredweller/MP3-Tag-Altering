@@ -1,5 +1,5 @@
 ﻿
-namespace Core.Repository
+namespace Repository
 {
     public interface IRepository<TEntity>
     {

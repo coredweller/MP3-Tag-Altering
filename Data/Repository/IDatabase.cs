@@ -8,7 +8,9 @@ namespace Repository
     public interface IDatabase
     {
         //Data Sources
-        
+        IQueryable<IShow> ShowDataSource { get; }
+        IQueryable<ISet> SetDataSource { get; }
+        IQueryable<ISetSong> SetSongDataSource { get; }
 
         //Heavy Lifting
         void Delete<TEntity>(TEntity instance) where TEntity : class;

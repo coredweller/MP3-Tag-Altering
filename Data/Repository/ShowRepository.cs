@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TheCore.Interfaces;
-using PhishPond.Concrete;
-using TheCore.Helpers;
-using TheCore.Repository;
-using TheCore.Exceptions;
+using DomainObjects;
+using Core.Helpers;
+using Repository;
+using Core.Exceptions;
+using Core.Infrastructure.Logging;
 
-namespace PhishPond.Repository.LinqToSql
+namespace Repository
 {
     public class ShowRepository : BaseRepository<IShow, Show>,  IShowRepository
     {
         LogWriter writer = new LogWriter();
-        public ShowRepository(IPhishDatabase database) : base(database) { }
+        public ShowRepository(IDatabase database) : base(database) { }
 
-        public ShowRepository(IPhishDatabaseFactory factory) : base(factory) { }
+        public ShowRepository(IDatabaseFactory factory) : base(factory) { }
 
         private IQueryable<IShow> GetAll()
         {
-            return Database.PhishShowDataSource.Where(x => x.Deleted == false);
+            return Database.ShowDataSource.Where(x => x.Deleted == false);
         }
 
         public IQueryable<IShow> FindAll()
@@ -44,11 +44,6 @@ namespace PhishPond.Repository.LinqToSql
         public IShow FindByShowDate(DateTime date)
         {
             return GetAll().SingleOrDefault(show => show.ShowDate == date);
-        }
-
-        public IQueryable<IShow> FindByTourId(Guid tourId)
-        {
-            return GetAll().Where(x => x.TourId == tourId);
         }
 
         public override void Add(IShow entity)

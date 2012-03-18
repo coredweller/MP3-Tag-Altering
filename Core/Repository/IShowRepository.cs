@@ -1,9 +1,9 @@
 ﻿using System;
-using TheCore.Interfaces;
+using DomainObjects;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TheCore.Repository
+namespace Repository
 {
     public interface IShowRepository
     {
@@ -14,6 +14,5 @@ namespace TheCore.Repository
         IQueryable<IShow> FindShowsBeforeDate(DateTime date);
         IQueryable<IShow> FindAll();
         void Remove(IShow entity);
-        IQueryable<IShow> FindByTourId(Guid tourId);
     }
 }

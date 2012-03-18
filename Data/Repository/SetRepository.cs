@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TheCore.Interfaces;
-using PhishPond.Concrete;
-using TheCore.Helpers;
-using TheCore.Repository;
-using TheCore.Exceptions;
+using DomainObjects;
+using Core.Helpers;
+using Repository;
+using Core.Exceptions;
+using Core.Infrastructure.Logging;
 
-namespace PhishPond.Repository.LinqToSql
+namespace Repository
 {
     public class SetRepository : BaseRepository<ISet, Set>, ISetRepository
     {
         LogWriter writer = new LogWriter();
-        public SetRepository(IPhishDatabase database) : base(database) { }
+        public SetRepository(IDatabase database) : base(database) { }
 
-        public SetRepository(IPhishDatabaseFactory factory) : base(factory) { }
+        public SetRepository(IDatabaseFactory factory) : base(factory) { }
 
         private IQueryable<ISet> GetAll()
         {
-            return Database.PhishSetDataSource.Where(x => x.Deleted == false);
+            return Database.SetDataSource.Where(x => x.Deleted == false);
         }
 
         public IQueryable<ISet> FindAll()

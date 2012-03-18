@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-//using Structu
-//using StructureMap;
-//using Core;
-//using Core.Infrastructure;
+using StructureMap;
+using Core;
+using Data;
+using Core.Infrastructure;
 
 namespace TagClient
 {
@@ -17,23 +17,27 @@ namespace TagClient
         [STAThread]
         static void Main() {
 
-
+            IocBootstrap.SetupIoc();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
             Application.Run( new Form1() );
         }
 
-        //public static class IocBootstrap
-        //{
-        //    public static void SetupIoc() {
+        public static class IocBootstrap
+        {
+            public static void SetupIoc() {
                 
-                ///LEFT OFF HERE
+                ObjectFactory.Initialize( x =>
+                    {
+                        x.AddRegistry(new CoreRegistry());
+                        x.AddRegistry(new DataRegistry());
+                    });
 
-        //        //Ioc.InitializeWith(new DependencyResolverFactory(new DependencyResolver());
+                Ioc.InitializeWith(new DependencyResolverFactory(new DependencyResolver()));
 
-        //        //ObjectFactory.AssertConfigurationIsValid();
-        //    }
-        //}
+                ObjectFactory.AssertConfigurationIsValid();
+            }
+        }
     }
 }

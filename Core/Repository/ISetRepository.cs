@@ -1,9 +1,9 @@
 ﻿using System;
-using TheCore.Interfaces;
+using DomainObjects;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TheCore.Repository
+namespace Repository
 {
     public interface ISetRepository
     {

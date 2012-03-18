@@ -11,7 +11,8 @@
     <RootNamespace>TagClient</RootNamespace>
     <AssemblyName>TagClient</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -68,7 +69,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,6 +83,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{25887E99-A733-4E9C-8E61-7855C1E1952A}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{4BF5F0F6-09B7-48F7-9CC5-D5D7E8C9555C}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TagAltering\TagAltering.csproj">
       <Project>{E75B43B8-256A-4B19-AC76-F03BCE6F23F1}</Project>
       <Name>TagAltering</Name>

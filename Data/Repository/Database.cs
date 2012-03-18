@@ -13,7 +13,11 @@ namespace Repository
 
 
         //Data Sources
+        public IQueryable<IShow> ShowDataSource { get { return GetQueryable<Show>().Cast<IShow>(); } }
 
+        public IQueryable<ISet> SetDataSource { get { return GetQueryable<Set>().Cast<ISet>(); } }
+
+        public IQueryable<ISetSong> SetSongDataSource { get { return GetQueryable<SetSong>().Cast<ISetSong>(); } }
         
 
 

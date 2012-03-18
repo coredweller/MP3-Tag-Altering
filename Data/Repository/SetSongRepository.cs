@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TheCore.Interfaces;
-using PhishPond.Concrete;
-using TheCore.Helpers;
-using TheCore.Repository;
-using TheCore.Exceptions;
+using DomainObjects;
+using Core.Helpers;
+using Repository;
+using Core.Exceptions;
+using Core.Infrastructure.Logging;
 
-namespace PhishPond.Repository.LinqToSql
+namespace Repository
 {
     public class SetSongRepository : BaseRepository<ISetSong, SetSong>, ISetSongRepository
     {
         LogWriter writer = new LogWriter();
-        public SetSongRepository(IPhishDatabase database) : base(database) { }
+        public SetSongRepository(IDatabase database) : base(database) { }
 
-        public SetSongRepository(IPhishDatabaseFactory factory) : base(factory) { }
+        public SetSongRepository(IDatabaseFactory factory) : base(factory) { }
 
         private IQueryable<ISetSong> GetAll()
         {
@@ -34,22 +34,6 @@ namespace PhishPond.Repository.LinqToSql
         public ISetSong FindBySetId(Guid id)
         {
             return GetAll().SingleOrDefault(x => x.SetId == id);
-        }
-
-        public ISetSong FindBySongId(Guid id)
-        {
-            return GetAll().SingleOrDefault(x => x.SongId == id);
-        }
-
-        public ISetSong FindBySongIdAndSetId(Guid songId, Guid setId)
-        {
-            return GetAll().SingleOrDefault(x => x.SongId == songId && x.SetId == setId);
-        }
-
-
-        public IQueryable<ISetSong> FindAllSetSongsBySongId(Guid songId)
-        {
-            return GetAll().Where(x => x.SongId == songId);
         }
 
         public override void Add(ISetSong entity)
