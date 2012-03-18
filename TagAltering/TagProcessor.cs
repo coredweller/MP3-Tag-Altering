@@ -28,11 +28,38 @@ namespace TagAltering
             //Based on the Order Protocol use a different ordering scheme TODO: Replace with strategy pattern
             switch ( orderProtocol ) {
                 case OrderProtocol.Name:
-                    OrderPathsByFileName();
-                    break;
-
+                    return ProcessByFileName();
+                case OrderProtocol.Database:
+                    return ProcessByDatabase();
                 default: return false;
             }
+        }
+
+        /// <summary>
+        /// OrderProtocol Database Ordering Scheme
+        /// </summary>
+        /// <returns></returns>
+        private bool ProcessByDatabase() {
+            //LEFT OFF HERE
+
+
+            return false;
+        }
+
+        /// <summary>
+        /// OrderProtocol Name Ordering Scheme
+        /// </summary>
+        private bool ProcessByFileName() {
+            var tuples = new List<Tuple<string, string>>();
+
+            foreach ( var path in _FilePaths ) {
+                var splits = path.Split( '\\' );
+                var fileName = splits.Last();
+
+                tuples.Add( new Tuple<string, string>( path, fileName ) );
+            }
+
+            _FilePaths = tuples.OrderBy( x => x.Item2 ).Select( y => y.Item1 ).ToList();
 
             bool success = true;
             var count = 1;
@@ -46,27 +73,11 @@ namespace TagAltering
 
             return success;
         }
-
-        /// <summary>
-        /// OrderProtocol Name Ordering Scheme
-        /// </summary>
-        private void OrderPathsByFileName() {
-            var tuples = new List<Tuple<string, string>>();
-
-            foreach ( var path in _FilePaths ) {
-                var splits = path.Split( '\\' );
-                var fileName = splits.Last();
-
-                tuples.Add( new Tuple<string, string>( path, fileName ) );
-            }
-
-            _FilePaths = tuples.OrderBy( x => x.Item2 ).Select( y => y.Item1 ).ToList();
-        }
     }
 
     public enum OrderProtocol
     {
-        Name = 0
-
+        Name = 0,
+        Database = 1
     }
 }

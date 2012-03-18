@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Shows" EntityNamespace="DomainObjects" ContextNamespace="Repository" Class="Database" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=thedanimal\sqlexpress;Initial Catalog=Shows;Integrated Security=True" SettingsObjectName="Data.Properties.Settings" SettingsPropertyName="ShowsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[Set]" Member="Sets">
+    <Type Name="Set">
+      <Column Name="SetId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SetNumber" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Encore" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeletedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShowId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="Set_SetSong" Member="SetSongs" ThisKey="SetId" OtherKey="SetId" Type="SetSong" />
+      <Association Name="Show_Set" Member="Show" ThisKey="ShowId" OtherKey="ShowId" Type="Show" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Show" Member="Shows">
+    <Type Name="Show">
+      <Column Name="ShowId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VenueName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShowDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TicketPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeletedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VenueNotes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhishNetUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="PhishNetShowId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Show_Set" Member="Sets" ThisKey="ShowId" OtherKey="ShowId" Type="Set" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SetSong" Member="SetSongs">
+    <Type Name="SetSong">
+      <Column Name="SetSongId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SetId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SongName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Length" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cover" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Abbreviation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Order]" Member="Order" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Tease" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SpecialAppearances" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="JamStyle" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="BustOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Segue" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeletedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Set_SetSong" Member="Set" ThisKey="SetId" OtherKey="SetId" Type="Set" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

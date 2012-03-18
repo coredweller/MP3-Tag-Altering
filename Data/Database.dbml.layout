@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Listened">
+  <DataContextMoniker Name="/Database" />
+  <nestedChildShapes>
+    <classShape Id="cc808258-ec8c-4c13-830c-3825dea2cfe1" absoluteBounds="3.5, 1.75, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/Database/Set" />
+      <nestedChildShapes>
+        <elementListCompartment Id="595d3e43-9f4c-407f-bd03-e86ada581702" absoluteBounds="3.515, 2.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8ae4a40a-e584-48b4-9d2e-52c253fbbc1b" absoluteBounds="0.75, 1.125, 2, 3.886212565104167">
+      <DataClassMoniker Name="/Database/Show" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f233e9f2-e97b-4084-a5f5-4b37c83bee3c" absoluteBounds="0.765, 1.585, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7eb97336-5c61-4f19-8a28-9f33277de9d0" absoluteBounds="6.25, 1, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/Database/SetSong" />
+      <nestedChildShapes>
+        <elementListCompartment Id="26a556e3-385e-4ff8-a85c-d881a4901982" absoluteBounds="6.265, 1.46, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 3.02005126953125); (3.5 : 3.02005126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Database/Show/Show_Set" />
+      <nodes>
+        <classShapeMoniker Id="8ae4a40a-e584-48b4-9d2e-52c253fbbc1b" />
+        <classShapeMoniker Id="cc808258-ec8c-4c13-830c-3825dea2cfe1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.02005126953125); (6.25 : 3.02005126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Database/Set/Set_SetSong" />
+      <nodes>
+        <classShapeMoniker Id="cc808258-ec8c-4c13-830c-3825dea2cfe1" />
+        <classShapeMoniker Id="7eb97336-5c61-4f19-8a28-9f33277de9d0" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

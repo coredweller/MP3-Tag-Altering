@@ -35,7 +35,9 @@ namespace TagClient
             
             var tagProcessor = new TagProcessor(filePaths.ToList());
 
-            var success = tagProcessor.UpdateTrackOrder( OrderProtocol.Name );
+            var protocol = DetermineOrderProtocol();
+
+            var success = tagProcessor.UpdateTrackOrder( protocol );
 
             if ( success ) {
                 MessageBox.Show( "You have successfully updated the track ordering!" );
@@ -43,6 +45,12 @@ namespace TagClient
             else {
                 MessageBox.Show( "There was a problem updating the track ordering." );
             }
+        }
+
+        private OrderProtocol DetermineOrderProtocol() {
+            if ( rdoDatabase.Checked ) return OrderProtocol.Database;
+
+            return OrderProtocol.Name;
         }
     }
 }
