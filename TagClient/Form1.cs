@@ -33,28 +33,51 @@ namespace TagClient
                 return;
             }
 
-            var success = ProcessFiles(filePaths);
+            var success = ProcessOrderProtocol(filePaths);
 
             DetermineSuccess( success );
         }
 
-        private Success ProcessFiles(string[] filePaths) {
-            var tagProcessor = new TagProcessor( filePaths.ToList() );
-
+        /// <summary>
+        /// Top level controller to decide which Order Protocol to follow
+        /// </summary>
+        /// <param name="filePaths">The file paths being used for this session</param>
+        /// <returns>The status of the user's request</returns>
+        private Success ProcessOrderProtocol(string[] filePaths) {
             var protocol = OrderProtocol.Name;
 
             if ( rdoDatabase.Checked ) protocol = OrderProtocol.Database;
             
+            var tagProcessor = new TagProcessor( filePaths.ToList() );
+
             //Based on the Order Protocol use a different ordering scheme TODO: Replace with strategy pattern
             switch ( protocol ) {
                 case OrderProtocol.Name:
                     return tagProcessor.ProcessByFileName() == true ? Success.True : Success.False;
                 case OrderProtocol.Database:
+                    //If FilFiles failes then return a failure
+                    if ( !FillFiles( tagProcessor ) ) return Success.False;
+
+                    //Otherwise have the user continue
                     return Success.Continue;
-                    break;
             }
 
             return Success.False;
+        }
+
+        IList<DomainObjects.ShowFile> _ShowFiles;
+        private bool FillFiles( TagProcessor tagProcessor ) {
+            _ShowFiles = tagProcessor.GetShowFiles( tagProcessor.GetFilePaths() );
+
+            if ( _ShowFiles == null || !_ShowFiles.Any() ) return false;
+
+            lstFiles.Items.Clear();
+
+            foreach ( var file in _ShowFiles ) {
+                lstFiles.Items.Add( file.FileName );
+            }
+
+            return true;
         }
 
         private void DetermineSuccess( Success success ) {
@@ -75,15 +98,20 @@ namespace TagClient
             DateTime showDate;
             if ( !DateTime.TryParse( txtShowDate.Text, out showDate ) ) MessageBox.Show( "Please enter a valid date to get the show." );
 
-
+            ///LEFT OFF HERE
         }
 
     }
 
     public enum Success
     {
+        //The request has failed
         False = 0,
+
+        //The request has succeeded
         True = 1,
+
+        //There are more steps needed to determine whether it was a success yet.
         Continue = 2
     }
 }

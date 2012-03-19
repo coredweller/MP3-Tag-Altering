@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DomainObjects;
 
 namespace TagAltering
 {
@@ -15,21 +16,17 @@ namespace TagAltering
             _FilePaths = filePaths;
         }
 
+        public IList<string> GetFilePaths() {
+            return _FilePaths;
+        }
         
         /// <summary>
         /// OrderProtocol Name Ordering Scheme
         /// </summary>
         public bool ProcessByFileName() {
-            var tuples = new List<Tuple<string, string>>();
+            var showFiles = GetShowFiles(_FilePaths);
 
-            foreach ( var path in _FilePaths ) {
-                var splits = path.Split( '\\' );
-                var fileName = splits.Last();
-
-                tuples.Add( new Tuple<string, string>( path, fileName ) );
-            }
-
-            _FilePaths = tuples.OrderBy( x => x.Item2 ).Select( y => y.Item1 ).ToList();
+            _FilePaths = showFiles.OrderBy( x => x.FileName ).Select( y => y.FullPath ).ToList();
 
             bool success = true;
             var count = 1;
@@ -42,6 +39,16 @@ namespace TagAltering
             }
 
             return success;
+        }
+
+        public IList<ShowFile> GetShowFiles(IList<string> filePaths) {
+            var showFiles = new List<ShowFile>();
+
+            foreach ( var path in filePaths ) {
+                showFiles.Add( new ShowFile( path ) );
+            }
+
+            return showFiles;
         }
     }
 

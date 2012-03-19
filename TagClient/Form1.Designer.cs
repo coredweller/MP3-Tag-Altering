@@ -102,9 +102,9 @@
             // lstFiles
             // 
             this.lstFiles.FormattingEnabled = true;
-            this.lstFiles.Location = new System.Drawing.Point(154, 185);
+            this.lstFiles.Location = new System.Drawing.Point(23, 67);
             this.lstFiles.Name = "lstFiles";
-            this.lstFiles.Size = new System.Drawing.Size(124, 251);
+            this.lstFiles.Size = new System.Drawing.Size(238, 264);
             this.lstFiles.TabIndex = 6;
             // 
             // lstDatabase
@@ -112,13 +112,13 @@
             this.lstDatabase.FormattingEnabled = true;
             this.lstDatabase.Location = new System.Drawing.Point(343, 185);
             this.lstDatabase.Name = "lstDatabase";
-            this.lstDatabase.Size = new System.Drawing.Size(117, 251);
+            this.lstDatabase.Size = new System.Drawing.Size(249, 264);
             this.lstDatabase.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(151, 169);
+            this.label3.Location = new System.Drawing.Point(20, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 8;
@@ -162,7 +162,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnGetShow);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.lstFiles);
             this.groupBox1.Controls.Add(this.txtShowDate);
             this.groupBox1.Location = new System.Drawing.Point(15, 118);
             this.groupBox1.Name = "groupBox1";
@@ -177,9 +179,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 481);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.lstDatabase);
-            this.Controls.Add(this.lstFiles);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rdoDatabase);
             this.Controls.Add(this.rdoName);

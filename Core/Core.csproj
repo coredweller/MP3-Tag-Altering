@@ -58,6 +58,7 @@
     <Compile Include="DomainObjects\ISet.cs" />
     <Compile Include="DomainObjects\ISetSong.cs" />
     <Compile Include="DomainObjects\IShow.cs" />
+    <Compile Include="DomainObjects\ShowFile.cs" />
     <Compile Include="Exceptions\AlreadyExistsException.cs" />
     <Compile Include="Exceptions\EntityInUseException.cs" />
     <Compile Include="Exceptions\ObjectCreationException.cs" />
