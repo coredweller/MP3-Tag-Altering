@@ -9,7 +9,7 @@ namespace Repository
     {
         IQueryable<ISetSong> FindAll();
         ISetSong FindBySetSongId(Guid id);
-        ISetSong FindBySetId(Guid id);
+        IList<ISetSong> FindBySetId( Guid id );
         void Add(ISetSong entity);
         void Remove(ISetSong entity);
     }

@@ -39,6 +39,9 @@
             this.txtShowDate = new System.Windows.Forms.TextBox();
             this.btnGetShow = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMoveUp = new System.Windows.Forms.Button();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnSetOrder = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +105,7 @@
             // lstFiles
             // 
             this.lstFiles.FormattingEnabled = true;
-            this.lstFiles.Location = new System.Drawing.Point(23, 67);
+            this.lstFiles.Location = new System.Drawing.Point(6, 67);
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.Size = new System.Drawing.Size(238, 264);
             this.lstFiles.TabIndex = 6;
@@ -110,15 +113,16 @@
             // lstDatabase
             // 
             this.lstDatabase.FormattingEnabled = true;
-            this.lstDatabase.Location = new System.Drawing.Point(343, 185);
+            this.lstDatabase.Location = new System.Drawing.Point(350, 67);
             this.lstDatabase.Name = "lstDatabase";
+            this.lstDatabase.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lstDatabase.Size = new System.Drawing.Size(249, 264);
             this.lstDatabase.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 51);
+            this.label3.Location = new System.Drawing.Point(3, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 8;
@@ -127,7 +131,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(340, 169);
+            this.label4.Location = new System.Drawing.Point(347, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 9;
@@ -161,6 +165,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSetOrder);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lstDatabase);
+            this.groupBox1.Controls.Add(this.btnMoveDown);
+            this.groupBox1.Controls.Add(this.btnMoveUp);
             this.groupBox1.Controls.Add(this.btnGetShow);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label5);
@@ -173,13 +182,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.Location = new System.Drawing.Point(250, 134);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(25, 23);
+            this.btnMoveUp.TabIndex = 13;
+            this.btnMoveUp.Text = "/\\";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
+            // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Location = new System.Drawing.Point(250, 163);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(25, 23);
+            this.btnMoveDown.TabIndex = 14;
+            this.btnMoveDown.Text = "\\/";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
+            // 
+            // btnSetOrder
+            // 
+            this.btnSetOrder.Location = new System.Drawing.Point(250, 308);
+            this.btnSetOrder.Name = "btnSetOrder";
+            this.btnSetOrder.Size = new System.Drawing.Size(75, 23);
+            this.btnSetOrder.TabIndex = 15;
+            this.btnSetOrder.Text = "Set Order";
+            this.btnSetOrder.UseVisualStyleBackColor = true;
+            this.btnSetOrder.Click += new System.EventHandler(this.btnSetOrder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 481);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lstDatabase);
+            this.ClientSize = new System.Drawing.Size(638, 466);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rdoDatabase);
             this.Controls.Add(this.rdoName);
@@ -212,6 +249,9 @@
         private System.Windows.Forms.TextBox txtShowDate;
         private System.Windows.Forms.Button btnGetShow;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Button btnMoveUp;
+        private System.Windows.Forms.Button btnSetOrder;
     }
 }
 

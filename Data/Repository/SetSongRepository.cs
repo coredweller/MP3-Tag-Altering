@@ -31,9 +31,9 @@ namespace Repository
             return GetAll().SingleOrDefault(x => x.SetSongId == id);
         }
 
-        public ISetSong FindBySetId(Guid id)
+        public IList<ISetSong> FindBySetId(Guid id)
         {
-            return GetAll().SingleOrDefault(x => x.SetId == id);
+            return GetAll().Where( x => x.SetId == id ).OrderBy(y => y.Order).ToList();
         }
 
         public override void Add(ISetSong entity)

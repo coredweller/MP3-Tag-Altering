@@ -103,6 +103,7 @@
     <Compile Include="Repository\ISetRepository.cs" />
     <Compile Include="Repository\ISetSongRepository.cs" />
     <Compile Include="Repository\IShowRepository.cs" />
+    <Compile Include="Services\Interfaces\IShowService.cs" />
     <Compile Include="Services\ShowService.cs" />
   </ItemGroup>
   <ItemGroup />

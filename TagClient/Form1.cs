@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using TagAltering;
 using System.IO;
+using Core.Services;
+using Core.Infrastructure;
 
 namespace TagClient
 {
@@ -33,7 +35,7 @@ namespace TagClient
                 return;
             }
 
-            var success = ProcessOrderProtocol(filePaths);
+            var success = ProcessOrderProtocol( filePaths );
 
             DetermineSuccess( success );
         }
@@ -43,11 +45,11 @@ namespace TagClient
         /// </summary>
         /// <param name="filePaths">The file paths being used for this session</param>
         /// <returns>The status of the user's request</returns>
-        private Success ProcessOrderProtocol(string[] filePaths) {
+        private Success ProcessOrderProtocol( string[] filePaths ) {
             var protocol = OrderProtocol.Name;
 
             if ( rdoDatabase.Checked ) protocol = OrderProtocol.Database;
-            
+
             var tagProcessor = new TagProcessor( filePaths.ToList() );
 
             //Based on the Order Protocol use a different ordering scheme TODO: Replace with strategy pattern
@@ -98,7 +100,42 @@ namespace TagClient
             DateTime showDate;
             if ( !DateTime.TryParse( txtShowDate.Text, out showDate ) ) MessageBox.Show( "Please enter a valid date to get the show." );
 
-            ///LEFT OFF HERE
+            var showService = Ioc.GetInstance<IShowService>();
+            var setList = showService.GetSetList( showDate );
+
+            if ( setList == null ) {
+                MessageBox.Show( "There is no show in the database for that date" );
+                return;
+            }
+
+            lstDatabase.DataSource = setList.Select( x => x.SongName ).ToList();
+        }
+
+        private void btnMoveUp_Click( object sender, EventArgs e ) {
+            //If there is nothing selected then get out of here
+            if ( lstFiles.SelectedItem == null ) {
+                MessageBox.Show( "Please select a file to move up" );
+                return;
+            }
+
+            //If the first item is selected then do nothing because it cannot move up
+            if ( lstFiles.SelectedIndex == 0 ) return;
+
+            var index = lstFiles.SelectedIndex;
+            var value = lstFiles.SelectedItem;
+
+            //Have to do it by index in case the same song happens twice which is very common with Phish
+            lstFiles.Items.RemoveAt( index );
+
+            lstFiles.Items.Insert( index - 1, value );
+        }
+
+        private void btnMoveDown_Click( object sender, EventArgs e ) {
+
+        }
+
+        private void btnSetOrder_Click( object sender, EventArgs e ) {
+
         }
 
     }

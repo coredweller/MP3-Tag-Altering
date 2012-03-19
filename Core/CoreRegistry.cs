@@ -1,6 +1,7 @@
 ﻿using StructureMap.Configuration.DSL;
 using Core.Configuration;
 using Core.Infrastructure.Logging;
+using Core.Services;
 
 namespace Core
 {
@@ -8,6 +9,19 @@ namespace Core
     {
         public CoreRegistry()
         {
+
+            For<IShowService>()
+                .Singleton()
+                .Use<ShowService>();
+
+
+
+
+
+
+
+
+
             For<IAppConfigManager>()
                 .Singleton()
                 .Use<AppConfigManager>();
