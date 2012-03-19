@@ -36,9 +36,11 @@
             this.txtShowDate = new System.Windows.Forms.TextBox();
             this.btnGetShow = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnMoveUp = new System.Windows.Forms.Button();
-            this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnSetOrder = new System.Windows.Forms.Button();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnMoveUp = new System.Windows.Forms.Button();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,11 +62,11 @@
             // 
             // btnProcess
             // 
-            this.btnProcess.Location = new System.Drawing.Point(484, 23);
+            this.btnProcess.Location = new System.Drawing.Point(125, 62);
             this.btnProcess.Name = "btnProcess";
             this.btnProcess.Size = new System.Drawing.Size(105, 23);
             this.btnProcess.TabIndex = 2;
-            this.btnProcess.Text = "Fill Your Files;";
+            this.btnProcess.Text = "Fill Your Files";
             this.btnProcess.UseVisualStyleBackColor = true;
             this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
             // 
@@ -146,27 +148,6 @@
             this.groupBox1.Size = new System.Drawing.Size(606, 341);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // btnMoveUp
-            // 
-            this.btnMoveUp.Location = new System.Drawing.Point(250, 134);
-            this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(25, 23);
-            this.btnMoveUp.TabIndex = 13;
-            this.btnMoveUp.Text = "/\\";
-            this.btnMoveUp.UseVisualStyleBackColor = true;
-            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
-            // 
-            // btnMoveDown
-            // 
-            this.btnMoveDown.Location = new System.Drawing.Point(250, 163);
-            this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(25, 23);
-            this.btnMoveDown.TabIndex = 14;
-            this.btnMoveDown.Text = "\\/";
-            this.btnMoveDown.UseVisualStyleBackColor = true;
-            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
             // btnSetOrder
             // 
@@ -178,11 +159,43 @@
             this.btnSetOrder.UseVisualStyleBackColor = true;
             this.btnSetOrder.Click += new System.EventHandler(this.btnSetOrder_Click);
             // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Location = new System.Drawing.Point(250, 163);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(25, 23);
+            this.btnMoveDown.TabIndex = 14;
+            this.btnMoveDown.Text = "\\/";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
+            // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.Location = new System.Drawing.Point(250, 134);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(25, 23);
+            this.btnMoveUp.TabIndex = 13;
+            this.btnMoveUp.Text = "/\\";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
+            // 
+            // btnChooseFolder
+            // 
+            this.btnChooseFolder.Location = new System.Drawing.Point(496, 24);
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.Size = new System.Drawing.Size(93, 23);
+            this.btnChooseFolder.TabIndex = 14;
+            this.btnChooseFolder.Text = "Choose Folder";
+            this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            // 
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 444);
+            this.Controls.Add(this.btnChooseFolder);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtProcess);
@@ -212,6 +225,8 @@
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnSetOrder;
+        private System.Windows.Forms.Button btnChooseFolder;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }
 

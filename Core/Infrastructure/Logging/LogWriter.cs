@@ -52,6 +52,20 @@ namespace Core.Infrastructure.Logging
                 log.Debug(value);
             }
         }
+        
+        public void WriteInfo( string value ) {
+            if ( value != null ) {
+                log.Info( value );
+            }
+        }
+
+        public void WriteFatal(string value)
+        {
+            if (value != null)
+            {
+                log.Fatal(value);
+            }
+        }
 
         public override void Write(char[] buffer, int index, int count)
         {

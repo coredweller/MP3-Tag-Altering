@@ -10,11 +10,15 @@ using TagAltering;
 using System.IO;
 using Core.Services;
 using Core.Infrastructure;
+using Core.Infrastructure.Logging;
 
 namespace TagClient
 {
     public partial class Form1 : Form
     {
+        private TagProcessor _TagProcessor;
+        private LogWriter _Log = new LogWriter();
+
         public Form1() {
             InitializeComponent();
         }
@@ -27,46 +31,25 @@ namespace TagClient
                 return;
             }
 
-            //Find only MP3s because the TagProcessor only has MP3 capabilities
-            var filePaths = Directory.GetFiles( folder, "*.mp3" );
+            try {
 
-            if ( filePaths == null || filePaths.Count() <= 0 ) {
-                MessageBox.Show( "There are no files in that folder" );
+                //Find only MP3s because the TagProcessor only has MP3 capabilities
+                var filePaths = Directory.GetFiles( folder, "*.mp3" );
+
+                if ( filePaths == null || filePaths.Count() <= 0 ) {
+                    MessageBox.Show( "There are no files in that folder" );
+                    return;
+                }
+
+                _TagProcessor = new TagProcessor( filePaths.ToList() );
+                FillFiles();
+            }
+            catch ( Exception ex ) {
+                _Log.WriteFatal( "There was an error creating the Tag Processor.  The files have an issue with their paths. WITH EXCEPTION:" + ex.Message );
+                MessageBox.Show( "There is an issue with these files.  Please choose a valid folder of MP3 files." );
                 return;
             }
-
-            var tagProcessor = new TagProcessor( filePaths.ToList() );
-            FillFiles( tagProcessor );
-
-            //DetermineSuccess( success );
         }
-
-        IList<DomainObjects.ShowFile> _ShowFiles;
-        private void FillFiles( TagProcessor tagProcessor ) {
-            _ShowFiles = tagProcessor.OrderByFileName( );
-
-            if ( _ShowFiles == null || !_ShowFiles.Any() ) return;
-
-            lstFiles.Items.Clear();
-
-            foreach ( var file in _ShowFiles ) {
-                lstFiles.Items.Add( file.FileName );
-            }
-        }
-
-        //private void DetermineSuccess( Success success ) {
-        //    switch ( success ) {
-        //        case Success.True:
-        //            MessageBox.Show( "You have successfully updated the track ordering!" );
-        //            break;
-        //        case Success.False:
-        //            MessageBox.Show( "There was a problem updating the track ordering." );
-        //            break;
-        //        case Success.Continue:
-        //            MessageBox.Show( "Enter a show date to match the show up with your files. " );
-        //            break;
-        //    }
-        //}
 
         private void btnGetShow_Click( object sender, EventArgs e ) {
             DateTime showDate;
@@ -82,6 +65,45 @@ namespace TagClient
 
             lstDatabase.DataSource = setList.Select( x => x.SongName ).ToList();
         }
+
+        private void btnSetOrder_Click( object sender, EventArgs e ) {
+            var setList = new List<Tag>();
+
+            var files = _TagProcessor.Files;
+
+            if ( files == null || !files.Any() ) return;
+
+            foreach ( var fileName in lstFiles.Items ) {
+                setList.Add( files.SingleOrDefault( x => x.FileName == fileName.ToString() ) );
+            }
+
+            var success = _TagProcessor.UpdateTrackOrdering( setList );
+
+            DetermineSuccess( success );
+        }
+
+        private void FillFiles() {
+
+            var files = _TagProcessor.Files;
+
+            if ( files == null || !files.Any() ) return;
+
+            lstFiles.Items.Clear();
+
+            foreach ( var file in files ) {
+                lstFiles.Items.Add( file.FileName );
+            }
+        }
+
+        private void DetermineSuccess( bool success ) {
+            if ( success )
+                MessageBox.Show( "You have successfully updated the track ordering!" );
+            else
+                MessageBox.Show( "There was a problem updating the track ordering." );
+
+        }
+
+        #region Moving Files
 
         private void btnMoveUp_Click( object sender, EventArgs e ) {
             MoveFile( true );
@@ -124,21 +146,13 @@ namespace TagClient
             lstFiles.SetSelected( moddedIndex, true );
         }
 
-        private void btnSetOrder_Click( object sender, EventArgs e ) {
-
+        #endregion
+        
+        private void btnChooseFolder_Click( object sender, EventArgs e ) {
+            if ( folderBrowserDialog.ShowDialog() == DialogResult.OK ) {
+                txtProcess.Text = folderBrowserDialog.SelectedPath;
+            }
         }
 
     }
-
-    //public enum Success
-    //{
-    //    //The request has failed
-    //    False = 0,
-
-    //    //The request has succeeded
-    //    True = 1,
-
-    //    //There are more steps needed to determine whether it was a success yet.
-    //    Continue = 2
-    //}
 }

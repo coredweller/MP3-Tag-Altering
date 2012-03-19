@@ -6,18 +6,22 @@ using StructureMap;
 using Core;
 using Data;
 using Core.Infrastructure;
+using Core.Infrastructure.Logging;
 
 namespace TagClient
 {
     static class Program
     {
+        private readonly static LogWriter _Log = new LogWriter();
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main() {
-
+            log4net.Config.XmlConfigurator.Configure();
+            _Log.Write( "Before IOC Startup" );
             IocBootstrap.SetupIoc();
+            _Log.Write( "After IOC Startup" );
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
