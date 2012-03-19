@@ -19,14 +19,18 @@ namespace TagAltering
         public IList<string> GetFilePaths() {
             return _FilePaths;
         }
+
+        public IList<ShowFile> OrderByFileName( ) {
+            var showFiles = GetShowFiles();
+
+            return showFiles.OrderBy( x => x.FileName ).ToList();
+        }
         
         /// <summary>
         /// OrderProtocol Name Ordering Scheme
         /// </summary>
         public bool ProcessByFileName() {
-            var showFiles = GetShowFiles(_FilePaths);
-
-            _FilePaths = showFiles.OrderBy( x => x.FileName ).Select( y => y.FullPath ).ToList();
+            _FilePaths = OrderByFileName( ).Select( y => y.FullPath ).ToList();
 
             bool success = true;
             var count = 1;
@@ -41,10 +45,10 @@ namespace TagAltering
             return success;
         }
 
-        public IList<ShowFile> GetShowFiles(IList<string> filePaths) {
+        private IList<ShowFile> GetShowFiles() {
             var showFiles = new List<ShowFile>();
-
-            foreach ( var path in filePaths ) {
+            
+            foreach ( var path in _FilePaths ) {
                 showFiles.Add( new ShowFile( path ) );
             }
 

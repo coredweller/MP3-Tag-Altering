@@ -35,66 +35,38 @@ namespace TagClient
                 return;
             }
 
-            var success = ProcessOrderProtocol( filePaths );
-
-            DetermineSuccess( success );
-        }
-
-        /// <summary>
-        /// Top level controller to decide which Order Protocol to follow
-        /// </summary>
-        /// <param name="filePaths">The file paths being used for this session</param>
-        /// <returns>The status of the user's request</returns>
-        private Success ProcessOrderProtocol( string[] filePaths ) {
-            var protocol = OrderProtocol.Name;
-
-            if ( rdoDatabase.Checked ) protocol = OrderProtocol.Database;
-
             var tagProcessor = new TagProcessor( filePaths.ToList() );
+            FillFiles( tagProcessor );
 
-            //Based on the Order Protocol use a different ordering scheme TODO: Replace with strategy pattern
-            switch ( protocol ) {
-                case OrderProtocol.Name:
-                    return tagProcessor.ProcessByFileName() == true ? Success.True : Success.False;
-                case OrderProtocol.Database:
-                    //If FilFiles failes then return a failure
-                    if ( !FillFiles( tagProcessor ) ) return Success.False;
-
-                    //Otherwise have the user continue
-                    return Success.Continue;
-            }
-
-            return Success.False;
+            //DetermineSuccess( success );
         }
 
         IList<DomainObjects.ShowFile> _ShowFiles;
-        private bool FillFiles( TagProcessor tagProcessor ) {
-            _ShowFiles = tagProcessor.GetShowFiles( tagProcessor.GetFilePaths() );
+        private void FillFiles( TagProcessor tagProcessor ) {
+            _ShowFiles = tagProcessor.OrderByFileName( );
 
-            if ( _ShowFiles == null || !_ShowFiles.Any() ) return false;
+            if ( _ShowFiles == null || !_ShowFiles.Any() ) return;
 
             lstFiles.Items.Clear();
 
             foreach ( var file in _ShowFiles ) {
                 lstFiles.Items.Add( file.FileName );
             }
-
-            return true;
         }
 
-        private void DetermineSuccess( Success success ) {
-            switch ( success ) {
-                case Success.True:
-                    MessageBox.Show( "You have successfully updated the track ordering!" );
-                    break;
-                case Success.False:
-                    MessageBox.Show( "There was a problem updating the track ordering." );
-                    break;
-                case Success.Continue:
-                    MessageBox.Show( "Enter a show date to match the show up with your files. " );
-                    break;
-            }
-        }
+        //private void DetermineSuccess( Success success ) {
+        //    switch ( success ) {
+        //        case Success.True:
+        //            MessageBox.Show( "You have successfully updated the track ordering!" );
+        //            break;
+        //        case Success.False:
+        //            MessageBox.Show( "There was a problem updating the track ordering." );
+        //            break;
+        //        case Success.Continue:
+        //            MessageBox.Show( "Enter a show date to match the show up with your files. " );
+        //            break;
+        //    }
+        //}
 
         private void btnGetShow_Click( object sender, EventArgs e ) {
             DateTime showDate;
@@ -112,26 +84,44 @@ namespace TagClient
         }
 
         private void btnMoveUp_Click( object sender, EventArgs e ) {
+            MoveFile( true );
+        }
+
+        private void btnMoveDown_Click( object sender, EventArgs e ) {
+            MoveFile( false );
+        }
+
+        private void MoveFile( bool up ) {
+
             //If there is nothing selected then get out of here
             if ( lstFiles.SelectedItem == null ) {
                 MessageBox.Show( "Please select a file to move up" );
                 return;
             }
 
-            //If the first item is selected then do nothing because it cannot move up
-            if ( lstFiles.SelectedIndex == 0 ) return;
-
             var index = lstFiles.SelectedIndex;
+            int moddedIndex;
+
+            if ( up ) {
+                //If the direction to move is UP
+                //   AND first item is selected then do nothing because it cannot move up
+                if ( index == 0 ) return;
+                moddedIndex = index - 1;
+            }
+            else {
+                //If the direction to move is DOWN
+                // AND the last item is selected then do nothing because it cannot move down
+                if ( index == lstFiles.Items.Count - 1 ) return;
+                moddedIndex = index + 1;
+            }
+
             var value = lstFiles.SelectedItem;
 
             //Have to do it by index in case the same song happens twice which is very common with Phish
             lstFiles.Items.RemoveAt( index );
-
-            lstFiles.Items.Insert( index - 1, value );
-        }
-
-        private void btnMoveDown_Click( object sender, EventArgs e ) {
-
+            //Then insert the same item at the index above or below its current location based on variable up
+            lstFiles.Items.Insert( moddedIndex, value );
+            lstFiles.SetSelected( moddedIndex, true );
         }
 
         private void btnSetOrder_Click( object sender, EventArgs e ) {
@@ -140,15 +130,15 @@ namespace TagClient
 
     }
 
-    public enum Success
-    {
-        //The request has failed
-        False = 0,
+    //public enum Success
+    //{
+    //    //The request has failed
+    //    False = 0,
 
-        //The request has succeeded
-        True = 1,
+    //    //The request has succeeded
+    //    True = 1,
 
-        //There are more steps needed to determine whether it was a success yet.
-        Continue = 2
-    }
+    //    //There are more steps needed to determine whether it was a success yet.
+    //    Continue = 2
+    //}
 }

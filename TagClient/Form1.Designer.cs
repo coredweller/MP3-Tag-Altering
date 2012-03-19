@@ -28,9 +28,6 @@
             this.txtProcess = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnProcess = new System.Windows.Forms.Button();
-            this.rdoName = new System.Windows.Forms.RadioButton();
-            this.rdoDatabase = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
             this.lstFiles = new System.Windows.Forms.ListBox();
             this.lstDatabase = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,7 +44,7 @@
             // 
             // txtProcess
             // 
-            this.txtProcess.Location = new System.Drawing.Point(64, 54);
+            this.txtProcess.Location = new System.Drawing.Point(73, 26);
             this.txtProcess.Name = "txtProcess";
             this.txtProcess.Size = new System.Drawing.Size(405, 20);
             this.txtProcess.TabIndex = 0;
@@ -55,7 +52,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 61);
+            this.label1.Location = new System.Drawing.Point(21, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 1;
@@ -63,44 +60,13 @@
             // 
             // btnProcess
             // 
-            this.btnProcess.Location = new System.Drawing.Point(475, 51);
+            this.btnProcess.Location = new System.Drawing.Point(484, 23);
             this.btnProcess.Name = "btnProcess";
-            this.btnProcess.Size = new System.Drawing.Size(75, 23);
+            this.btnProcess.Size = new System.Drawing.Size(105, 23);
             this.btnProcess.TabIndex = 2;
-            this.btnProcess.Text = "Process";
+            this.btnProcess.Text = "Fill Your Files;";
             this.btnProcess.UseVisualStyleBackColor = true;
             this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
-            // 
-            // rdoName
-            // 
-            this.rdoName.AutoSize = true;
-            this.rdoName.Checked = true;
-            this.rdoName.Location = new System.Drawing.Point(355, 81);
-            this.rdoName.Name = "rdoName";
-            this.rdoName.Size = new System.Drawing.Size(53, 17);
-            this.rdoName.TabIndex = 3;
-            this.rdoName.TabStop = true;
-            this.rdoName.Text = "Name";
-            this.rdoName.UseVisualStyleBackColor = true;
-            // 
-            // rdoDatabase
-            // 
-            this.rdoDatabase.AutoSize = true;
-            this.rdoDatabase.Location = new System.Drawing.Point(355, 96);
-            this.rdoDatabase.Name = "rdoDatabase";
-            this.rdoDatabase.Size = new System.Drawing.Size(71, 17);
-            this.rdoDatabase.TabIndex = 4;
-            this.rdoDatabase.Text = "Database";
-            this.rdoDatabase.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(300, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Sort By:";
             // 
             // lstFiles
             // 
@@ -113,10 +79,10 @@
             // lstDatabase
             // 
             this.lstDatabase.FormattingEnabled = true;
-            this.lstDatabase.Location = new System.Drawing.Point(350, 67);
+            this.lstDatabase.Location = new System.Drawing.Point(391, 67);
             this.lstDatabase.Name = "lstDatabase";
             this.lstDatabase.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lstDatabase.Size = new System.Drawing.Size(249, 264);
+            this.lstDatabase.Size = new System.Drawing.Size(208, 264);
             this.lstDatabase.TabIndex = 7;
             // 
             // label3
@@ -131,7 +97,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(347, 51);
+            this.label4.Location = new System.Drawing.Point(388, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 9;
@@ -175,7 +141,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lstFiles);
             this.groupBox1.Controls.Add(this.txtShowDate);
-            this.groupBox1.Location = new System.Drawing.Point(15, 118);
+            this.groupBox1.Location = new System.Drawing.Point(12, 91);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(606, 341);
             this.groupBox1.TabIndex = 13;
@@ -216,16 +182,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 466);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.rdoDatabase);
-            this.Controls.Add(this.rdoName);
+            this.ClientSize = new System.Drawing.Size(638, 444);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtProcess);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Phish Show File Organizer";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -238,9 +201,6 @@
         private System.Windows.Forms.TextBox txtProcess;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnProcess;
-        private System.Windows.Forms.RadioButton rdoName;
-        private System.Windows.Forms.RadioButton rdoDatabase;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lstFiles;
         private System.Windows.Forms.ListBox lstDatabase;
         private System.Windows.Forms.Label label3;
