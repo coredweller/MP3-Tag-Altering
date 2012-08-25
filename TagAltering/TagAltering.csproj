@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ID3">
+      <HintPath>..\libs\ID3.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tag.cs" />
+    <Compile Include="Tag_3v1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagProcessor.cs" />
+    <Compile Include="Tag_3v2.cs" />
     <Compile Include="Tag\BitReader.cs" />
     <Compile Include="Tag\ID3v1.cs" />
     <Compile Include="Tag\ID3v2.cs" />

@@ -11,6 +11,7 @@ using System.IO;
 using Core.Services;
 using Core.Infrastructure;
 using Core.Infrastructure.Logging;
+using Core.DomainObjects;
 
 namespace TagClient
 {
@@ -67,31 +68,49 @@ namespace TagClient
         }
 
         private void btnSetOrder_Click( object sender, EventArgs e ) {
-            var setList = new List<Tag>();
+            var setList_3v1 = new List<Tag_3v1>();
+            var setList_3v2 = new List<Tag_3v2>();
 
-            var files = _TagProcessor.Files;
+            bool set_3v1 = true;
+            bool set_3v2 = true;
 
-            if ( files == null || !files.Any() ) return;
+            var files_3v1 = _TagProcessor.Files_3v1;
+            var files_3v2 = _TagProcessor.Files_3v2;
+
+            if ( files_3v1 == null || !files_3v1.Any() ) set_3v1 = false;
+            if ( files_3v2 == null || !files_3v2.Any() ) set_3v2 = false;
 
             foreach ( var fileName in lstFiles.Items ) {
-                setList.Add( files.SingleOrDefault( x => x.FileName == fileName.ToString() ) );
+                if ( set_3v1 ) {
+                    setList_3v1.Add( files_3v1.SingleOrDefault( x => x.FileName == fileName.ToString() ) );
+                }
+
+                if ( set_3v2 ) {
+                    setList_3v2.Add( files_3v2.SingleOrDefault( x => x.FileName == fileName.ToString() ) );
+                }
             }
 
-            var success = _TagProcessor.UpdateTrackOrdering( setList );
+            var success = _TagProcessor.Update3v1TrackOrdering( setList_3v1 );
+            var finalSuccess = success && _TagProcessor.Update3v2TrackOrdering( setList_3v2 );
 
-            DetermineSuccess( success );
+            DetermineSuccess( finalSuccess );
         }
 
         private void FillFiles() {
+            IEnumerable<string> files;
 
-            var files = _TagProcessor.Files;
-
-            if ( files == null || !files.Any() ) return;
+            if ( _TagProcessor.Files_3v2 == null || !_TagProcessor.Files_3v2.Any() ) {
+                if ( _TagProcessor.Files_3v1 == null || !_TagProcessor.Files_3v1.Any() ) return;
+                else files = _TagProcessor.Files_3v1.Select( x => x.FileName );
+            }
+            else {
+                files = _TagProcessor.Files_3v2.Select( x => x.FileName );
+            }
 
             lstFiles.Items.Clear();
 
             foreach ( var file in files ) {
-                lstFiles.Items.Add( file.FileName );
+                lstFiles.Items.Add( file );
             }
         }
 
