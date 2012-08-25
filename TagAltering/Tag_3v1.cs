@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using mp3info;
 
 namespace TagAltering
 {
@@ -12,9 +11,6 @@ namespace TagAltering
     public class Tag_3v1 : Tag
     {
         private ID3.ID3v1Frame.ID3v1 _Tag { get; set; }
-
-        //private mp3info.mp3info _MP3Info { get; set; }
-        //private mp3info.ID3v1 _Tag { get; set; }
 
         public Tag_3v1( string filePath ) : base(filePath) {
             _Tag = _Info.ID3v1Info;
